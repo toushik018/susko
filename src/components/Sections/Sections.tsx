@@ -10,6 +10,7 @@ import {
   CommandLineIcon,
   RocketLaunchIcon,
 } from "@heroicons/react/24/outline";
+import Image from "next/image";
 
 const fadeInUp = {
   initial: { y: 60, opacity: 0 },
@@ -310,7 +311,9 @@ const ProjectCard = ({
     <div className="relative">
       <div className="relative h-40 mb-6 overflow-hidden rounded-lg bg-[#1E293B]">
         <div className="absolute inset-0 bg-[#94A3B8] mix-blend-color opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
-        <img
+        <Image
+          width={1000}
+          height={1000}
           src={image}
           alt={title}
           className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
