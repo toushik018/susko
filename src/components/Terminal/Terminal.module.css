@@ -1,0 +1,269 @@
+.terminal {
+  background: rgba(30, 30, 30, 0.95);
+  backdrop-filter: blur(40px);
+  border: 2px solid rgba(255, 255, 255, 0.05);
+  border-radius: 24px;
+  width: 100%;
+  max-width: 900px;
+  height: 600px;
+  margin: 2rem auto;
+  overflow: hidden;
+  font-family: 'Fira Code', monospace;
+  position: relative;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.terminal::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: conic-gradient(
+    from 180deg at 50% 50%,
+    #FF605C 0deg,
+    #FFBD44 120deg,
+    #00CA4E 240deg,
+    #FF605C 360deg
+  );
+  border-radius: 24px;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  opacity: 0.5;
+  animation: spin 4s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.terminal::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 0%,
+    rgba(255, 255, 255, 0.1),
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.terminalHeader {
+  background: rgba(20, 20, 20, 0.95);
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.terminalHeader::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+}
+
+.terminalControls {
+  display: flex;
+  gap: 12px;
+  margin-right: 1.5rem;
+  position: relative;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.control {
+  width: 14px;
+  height: 14px;
+  position: relative;
+  cursor: pointer;
+}
+
+.control::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  padding: 2px;
+  background: linear-gradient(45deg, #FF605C, #00CA4E);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.control:hover::before {
+  opacity: 1;
+}
+
+.control:nth-child(1) {
+  background: #FF605C;
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(255, 96, 92, 0.3);
+}
+
+.control:nth-child(2) {
+  background: #FFBD44;
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(255, 189, 68, 0.3);
+}
+
+.control:nth-child(3) {
+  background: #00CA4E;
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(0, 202, 78, 0.3);
+}
+
+.terminalTitle {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #C7C7C7, #FFFFFF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.terminalBody {
+  padding: 2rem;
+  height: calc(100% - 80px);
+  overflow-y: auto;
+  color: #fff;
+  position: relative;
+  cursor: url('/cursor.svg') 0 0, text;
+  background: 
+    radial-gradient(
+      circle at 0% 0%,
+      rgba(255, 96, 92, 0.03),
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 100% 100%,
+      rgba(0, 202, 78, 0.03),
+      transparent 50%
+    );
+}
+
+.terminalBody a,
+.terminalBody button,
+.terminalBody input,
+.terminalControls,
+.control {
+  cursor: pointer;
+}
+
+.terminalBody input {
+  cursor: text;
+}
+
+.commandBlock {
+  margin-bottom: 1.5rem;
+}
+
+.commandLine {
+  display: flex;
+  align-items: center;
+  font-size: 0.95rem;
+}
+
+.commandText {
+  color: rgba(255, 255, 255, 0.9);
+  margin-left: 0.5rem;
+}
+
+.prompt {
+  color: #00FF00;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.output {
+  color: #C7C7C7;
+  margin-top: 0.75rem;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  padding-left: 1.5rem;
+  position: relative;
+  font-size: 0.95rem;
+}
+
+.output::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    #FF605C,
+    #00CA4E
+  );
+}
+
+.currentLine {
+  display: flex;
+  align-items: center;
+  font-size: 0.95rem;
+}
+
+.input {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.9);
+  font-family: inherit;
+  font-size: inherit;
+  flex: 1;
+  outline: none;
+  margin-left: 0.5rem;
+  padding: 0;
+  min-width: 1px;
+  caret-color: #00FF00;
+}
+
+.input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+/* Modern scrollbar */
+.terminalBody::-webkit-scrollbar {
+  width: 6px;
+}
+
+.terminalBody::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 3px;
+}
+
+.terminalBody::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #FF605C, #00CA4E);
+  border-radius: 3px;
+  transition: background 0.3s ease;
+}
+
+.terminalBody::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #FF605C, #FFBD44);
+}
+
+/* Selection style */
+.terminalBody ::selection {
+  background: rgba(0, 202, 78, 0.2);
+  color: #fff;
+}

@@ -2,32 +2,122 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+@layer base {
+  body {
+    @apply bg-[#030303] text-zinc-100 min-h-screen;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+@layer components {
+  .neo-container {
+    @apply bg-[#0A0A0A] border-2 border-[#1A1A1A] rounded-2xl p-8 relative;
+    box-shadow: 20px 20px 60px #050505, -20px -20px 60px #0F0F0F;
+  }
+
+  .text-glow {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  }
+
+  .border-glow {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  }
+
+  .hover-translate {
+    @apply transition-transform duration-300 hover:-translate-y-1;
+  }
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+/* Modern Terminal */
+.terminal {
+  @apply bg-[#0A0A0A] border-2 border-[#1A1A1A] rounded-2xl overflow-hidden;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+}
+
+.terminal-header {
+  @apply bg-[#0A0A0A] border-b-2 border-[#1A1A1A] flex items-center p-4;
+}
+
+.terminal-content {
+  @apply p-6 font-mono text-sm leading-relaxed;
+}
+
+/* Modern Buttons */
+.btn-primary {
+  @apply bg-white text-black px-6 py-3 rounded-lg font-medium
+         relative overflow-hidden transition-all duration-300
+         hover:bg-zinc-200 active:scale-[0.98];
+}
+
+.btn-secondary {
+  @apply bg-[#1A1A1A] text-white px-6 py-3 rounded-lg font-medium
+         border-2 border-[#2A2A2A] transition-all duration-300
+         hover:bg-[#2A2A2A] hover:border-[#3A3A3A] active:scale-[0.98];
+}
+
+/* Cards */
+.card {
+  @apply bg-[#0A0A0A] border-2 border-[#1A1A1A] rounded-2xl p-6
+         transition-all duration-300 hover:border-[#2A2A2A];
+}
+
+.card-hover {
+  @apply hover:scale-[1.02] hover:shadow-2xl;
+}
+
+/* Section Layouts */
+.section {
+  @apply py-24 px-6 relative;
+}
+
+.section-inner {
+  @apply max-w-7xl mx-auto;
+}
+
+/* Modern Form Elements */
+.input {
+  @apply bg-[#1A1A1A] border-2 border-[#2A2A2A] rounded-lg px-4 py-3
+         text-white placeholder:text-zinc-500 focus:outline-none
+         focus:border-white transition-colors duration-300;
+}
+
+.textarea {
+  @apply bg-[#1A1A1A] border-2 border-[#2A2A2A] rounded-lg px-4 py-3
+         text-white placeholder:text-zinc-500 focus:outline-none
+         focus:border-white transition-colors duration-300 resize-none;
+}
+
+/* Typography */
+.heading-1 {
+  @apply text-5xl font-bold tracking-tight;
+}
+
+.heading-2 {
+  @apply text-4xl font-bold tracking-tight;
+}
+
+.heading-3 {
+  @apply text-2xl font-semibold;
+}
+
+/* Smooth scrolling */
+* {
+  scroll-behavior: smooth;
+}
+
+/* Modern scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-[#0A0A0A];
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-white rounded-full;
+}
+
+/* Text selection */
+::selection {
+  @apply bg-white text-black;
 }
